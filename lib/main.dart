@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ui_common/ui_common.dart';
 
-import 'pages/home.dart';
+import 'core/theme/theme.dart';
+import 'features/home/home.dart';
 
 void main() {
   runApp(const Application());
@@ -11,13 +13,15 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Parallax Effect',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-      ),
-      home: const HomePage(),
+    return ScreenUtilInit(
+      builder: (context,_) {
+        return MaterialApp(
+          title: 'Parallax Effect',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.dark,
+          home: const HomePage(),
+        );
+      }
     );
   }
 }
