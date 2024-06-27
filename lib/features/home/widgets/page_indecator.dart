@@ -15,26 +15,35 @@ class PageIndicators extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Listen to changes in the room selector notifier.
     return ValueListenableBuilder<int>(
       valueListenable: roomSelectorNotifier,
-      builder: (_, value, child) => AnimatedOpacity(
-        opacity: value != -1 ? 0 : 1,
-        duration: value != -1
-            ? const Duration(milliseconds: 1)
-            : const Duration(milliseconds: 400),
-        child: child,
-      ),
+      builder: (_, value, child) {
+        // Animate the opacity of the child widget based on the value of the room selector notifier.
+        return AnimatedOpacity(
+          opacity: value != -1 ? 0 : 1, // Hide the child widget if the room selector is not -1.
+          duration: value != -1
+              ? const Duration(milliseconds: 1) // Use a short duration for hiding the widget.
+              : const Duration(milliseconds: 400), // Use a longer duration for showing the widget.
+          child: child,
+        );
+      },
+      // Listen to changes in the page notifier.
       child: ValueListenableBuilder<double>(
         valueListenable: pageNotifier,
-        builder: (_, value, __) => Center(
-          child: PageViewIndicators(
-            length: SmartRoom.fakeValues.length,
-            pageIndex: value,
-          ),
-        ),
+        builder: (_, value, __) {
+          // Center the PageViewIndicators widget.
+          return Center(
+            child: PageViewIndicators(
+              length: SmartRoom.fakeValues.length, // Pass the length of the fake values list.
+              pageIndex: value, // Pass the current page index.
+            ),
+          );
+        },
       ),
     );
   }
+
 }
 
 class PageViewIndicators extends StatelessWidget {
