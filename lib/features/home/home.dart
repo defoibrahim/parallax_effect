@@ -15,9 +15,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final controller = PageController(viewportFraction: 0.8);
-  final ValueNotifier<double> pageNotifier = ValueNotifier(0);
+// Controls the page swiping and animation.
+  final controller = PageController(viewportFraction: 0.8); 
+  
+  // Tracks the current page position for animations.
+  final ValueNotifier<double> pageNotifier = ValueNotifier(0); 
+  
+  // Tracks the currently selected room index.
   final ValueNotifier<int> roomSelectorNotifier = ValueNotifier(-1);
+
 
   @override
   void initState() {
